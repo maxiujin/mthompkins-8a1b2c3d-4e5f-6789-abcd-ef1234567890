@@ -1,0 +1,39 @@
+<div class="login-wrapper">
+  <div class="login-card">
+    <h2 class="title">Secure Task Login</h2>
+
+<!-- Success message -->
+<div *ngIf="loginSuccess === true" class="alert alert-success">
+  Login successful. You are now signed in.
+</div>
+
+<!-- Error message -->
+<div *ngIf="loginSuccess === false" class="alert alert-error">
+  Login failed. Please check your email and password and try again.
+</div>
+
+
+
+    <form (ngSubmit)="login()" #f="ngForm">
+      <label>Email</label>
+      <input
+        type="email"
+        name="email"
+        [(ngModel)]="email"
+        placeholder="you@example.com"
+        required
+      />
+
+      <label>Password</label>
+      <input
+        type="password"
+        name="password"
+        [(ngModel)]="password"
+        placeholder="••••••••"
+        required
+      />
+
+      <button type="submit">Login</button>
+    </form>
+  </div>
+</div>

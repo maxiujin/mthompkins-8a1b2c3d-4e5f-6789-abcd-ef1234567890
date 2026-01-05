@@ -1,104 +1,234 @@
-# New Nx Repository
+# Secure Task Management System (Nx Monorepo)
 
-<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
+This repository contains a take-home implementation of a Secure Task Management System built with **Nx**, **NestJS**, and **Angular**.
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is ready ✨.
+The primary goal of this project was to demonstrate secure authentication, correct API behavior, testing discipline, and frontend-to-backend integration within a limited time window.
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/nx-api/js?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
+---
 
-## Generate a library
+## Tech Stack
 
-```sh
-npx nx g @nx/js:lib packages/pkg1 --publishable --importPath=@my-org/pkg1
+- Nx (monorepo tooling)
+- NestJS (Backend API)
+- Angular (Frontend dashboard using standalone components)
+- SQLite (local development database)
+- JWT authentication
+- Postman (manual API testing)
+- Jest (end-to-end testing)
+
+---
+
+## Prerequisites
+
+Before running the project, please ensure you have the following installed:
+
+- Node.js **18+**
+- npm
+- Postman (for API verification)
+
+---
+
+## Installation
+
+From the **repository root directory**, install all dependencies:
+
+```bash
+npm install
 ```
 
-## Run tasks
+---
 
-To build the library use:
+## Running the Backend (API)
 
-```sh
-npx nx build pkg1
+The backend is a NestJS application managed by Nx.
+
+To start the API server, run:
+
+```bash
+npx nx serve api
 ```
 
-To run any task with Nx use:
+What this does:
+- Builds and starts the NestJS API
+- Runs in watch mode for development
 
-```sh
-npx nx <target> <project-name>
-```
-
-These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
-
-[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Versioning and releasing
-
-To version and release the library use
+**API base URL:**
 
 ```
-npx nx release
+http://localhost:3000
 ```
 
-Pass `--dry-run` to see what would happen without actually releasing the library.
+A local SQLite database is automatically created for development.
 
-[Learn more about Nx release &raquo;](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+---
 
-## Keep TypeScript project references up to date
+## Running the Frontend (Dashboard)
 
-Nx automatically updates TypeScript [project references](https://www.typescriptlang.org/docs/handbook/project-references.html) in `tsconfig.json` files to ensure they remain accurate based on your project dependencies (`import` or `require` statements). This sync is automatically done when running tasks such as `build` or `typecheck`, which require updated references to function correctly.
+The frontend is an Angular application managed by Nx.
 
-To manually trigger the process to sync the project graph dependencies information to the TypeScript project references, run the following command:
+To start the frontend:
 
-```sh
-npx nx sync
+```bash
+npx nx serve dashboard
 ```
 
-You can enforce that the TypeScript project references are always in the correct state when running in CI by adding a step to your CI job configuration that runs the following command:
+What this does:
+- Starts the Angular development server
+- Rebuilds automatically on file changes
 
-```sh
-npx nx sync:check
+**Frontend URL:**
+
+```
+http://localhost:4200
 ```
 
-[Learn more about nx sync](https://nx.dev/reference/nx-commands#sync)
+**Login page:**
 
-## Nx Cloud
-
-Nx Cloud ensures a [fast and scalable CI](https://nx.dev/ci/intro/why-nx-cloud?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) pipeline. It includes features such as:
-
-- [Remote caching](https://nx.dev/ci/features/remote-cache?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Task distribution across multiple machines](https://nx.dev/ci/features/distribute-task-execution?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Automated e2e test splitting](https://nx.dev/ci/features/split-e2e-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Task flakiness detection and rerunning](https://nx.dev/ci/features/flaky-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-### Set up CI (non-Github Actions CI)
-
-**Note:** This is only required if your CI provider is not GitHub Actions.
-
-Use the following command to configure a CI workflow for your workspace:
-
-```sh
-npx nx g ci-workflow
+```
+http://localhost:4200/login
 ```
 
-[Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+---
 
-## Install Nx Console
+## Authentication User Flow (Postman Walkthrough)
 
-Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
+Postman is the recommended tool for validating backend functionality.  
+The steps below walk through a realistic user story from account creation to frontend login.
 
-[Install Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+---
 
-## Useful links
+### Step 1: Register a User
 
-Learn more:
+Create a new user using the registration endpoint.
 
-- [Learn more about this workspace setup](https://nx.dev/nx-api/js?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+**Request**
 
-And join the Nx community:
+```http
+POST http://localhost:3000/api/auth/register
+```
 
-- [Discord](https://go.nx.dev/community)
-- [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
-- [Our Youtube channel](https://www.youtube.com/@nxdevtools)
-- [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+**Body (JSON)**
+
+```json
+{
+  "email": "tokenuser@example.com",
+  "password": "123456"
+}
+```
+
+**Expected Result**
+
+- User is created successfully
+- Password is hashed securely
+- The user is now eligible to log in
+
+---
+
+### Step 2: Log In (Obtain JWT Token)
+
+Authenticate using the same credentials.
+
+**Request**
+
+```http
+POST http://localhost:3000/api/auth/login
+```
+
+**Body (JSON)**
+
+```json
+{
+  "email": "tokenuser@example.com",
+  "password": "123456"
+}
+```
+
+**Successful Response**
+
+```json
+{
+  "access_token": "jwt-token-here"
+}
+```
+
+This JWT token:
+- Confirms authentication works correctly
+- Can be used as a Bearer token for protected endpoints
+- Is what the frontend stores on successful login
+
+---
+
+### Step 3: Frontend Login Verification
+
+1. Open `http://localhost:4200/login`
+2. Enter the same email and password
+3. Click **Login**
+
+**Expected Behavior**
+
+- On success:
+  - JWT token is saved to `localStorage`
+  - A success message is displayed in the UI
+- On failure:
+  - A clear error message is shown
+
+This confirms end-to-end integration between the frontend and backend.
+
+---
+
+## Task Functionality (Current State)
+
+Task-related endpoints and UI were not fully completed within the time window.
+
+Authentication, testing, and integration were prioritized to ensure a stable and verifiable foundation. Task functionality would be the next area to extend.
+
+---
+
+## Running Tests
+
+### Backend End-to-End Tests
+
+To run the backend E2E test suite:
+
+```bash
+npx nx run api-e2e:e2e
+```
+
+### What the Tests Demonstrate
+
+- Authentication endpoints behave correctly
+- JWT tokens are issued and validated
+- Unauthorized requests are rejected
+- Core API wiring functions end-to-end
+
+All tests passing confirms the backend is stable and ready for further development.
+
+---
+
+## Project Scope & Tradeoffs
+
+Due to the time constraints of the take-home exercise, not all planned features were completed.
+
+I focused primarily on:
+- Making sure authentication endpoints work correctly
+- Writing and validating backend end-to-end tests
+- Ensuring frontend and backend integrate cleanly
+- Spending time on a clear, usable login UI
+
+As a result, the following areas were not finished:
+
+- Full task CRUD functionality
+- Task-related frontend UI
+- Role-based task permissions
+- Production deployment configuration
+
+Given additional time, these areas would be the next priorities. The current implementation is stable, testable, and structured to be extended without rework.
+
+---
+
+## Notes for Reviewers
+
+- Postman is required to fully validate backend behavior
+- The frontend demonstrates a complete login flow
+- Tests passing is an important signal of API correctness
+- The repository reflects a realistic, time-boxed submission

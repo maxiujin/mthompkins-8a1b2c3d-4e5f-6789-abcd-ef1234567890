@@ -1,0 +1,13 @@
+{
+  "name": "api-e2e",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nx/jest:jest",
+      "options": {
+        "jestConfig": "jest.config.cjs",
+        "passWithNoTests": false
+      }
+    }
+  }
+}
